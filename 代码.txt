@@ -1,0 +1,129 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include"BinarySearchTree.h"
+#include"KV.h"
+
+void test()   //Key 场景:搜索某个事物(关键字)。
+{
+	BSTree<int> bs;
+
+	int arr[] = { 5,3,4,1,7,8,2,6,0,9 };
+
+	for (auto e : arr)
+	{
+		bs.insert(e);
+	}
+
+
+	//bs.Inorder();
+
+	//for (auto e : arr)
+	//{
+	//	bs.eraseR(e);
+	//	bs.Inorder();
+	//}
+
+
+}
+
+
+void testR()
+{
+	BSTree<int> bs;
+
+	int arr[] = { 5,3,4,1,7,8,2,6,0,9 };
+
+	for (auto e : arr)
+	{
+		bs.insertR(e);
+	}
+
+	//bs.Inorder();
+
+	//for (auto e : arr)
+	//{
+	//	bs.eraseR(e);
+	//	bs.Inorder();
+	//}
+
+
+
+}
+
+
+void test_copy()
+{
+	BSTree<int> bs;
+
+	int arr[] = { 5,3,4,1,7,8,2,6,0,9 };
+
+	for (auto e : arr)
+	{
+		bs.insertR(e);
+	}
+
+	BSTree<int>copy(bs);
+
+}
+
+
+void test_KV()  //KV场景，根据学号查找对应的学生
+{
+	KV_BSTree<string, string> bs;
+	bs.insert("202001", "张三");
+	bs.insert("202002", "李四");
+	bs.insert("202003", "王五");
+	bs.insert("202004", "赵六");
+
+	bs.Inorder();
+	
+	cout << endl << endl;
+
+	string sno;
+
+	while (cin>>sno)
+	{
+		KV_BSTreeNode<string, string>* pos = bs.find(sno);
+		if (pos)
+		{
+			cout << "-------------" << endl;
+			cout <<"|" << pos->_key << ":" << pos->_val <<"|" << endl;
+			cout << "-------------" << endl;
+		}
+		else
+		{
+			cout << "non-existent" << endl;
+		}
+	}
+
+	return;
+
+}
+
+
+void test_KV_count()   //KV场景: 记录某样事物出现的次数
+{
+	KV_BSTree<string, int> bs;
+	vector<string> vs;
+	string arr[] = { "苹果" ,"西瓜" ,"苹果","香蕉","香蕉","西瓜" ,"西瓜" ,"西瓜" ,"西瓜","苹果" ,"橘子" };
+	for (auto& e : arr)
+	{
+		KV_BSTreeNode<string, int>* pos = bs.find(e);
+		if (pos == nullptr)
+		{
+			bs.insert(e,1);
+		}
+		else
+		{
+			pos->_val++;
+		}
+	}
+
+	bs.Inorder();
+}
+
+int main()
+{
+	//test_copy();
+	//test_KV();
+	test_KV_count();
+}
